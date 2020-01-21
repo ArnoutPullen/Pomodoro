@@ -1,0 +1,59 @@
+08:00/10:00
+08:00/08:25 iteration
+08:25/08:30 short break
+08:30/08:55 iteration
+08:55/09:00 short break
+09:00/09:25 iteration
+09:25/09:30 short break
+09:30/09:45 iteration
+09:45/10:00 long break
+
+10:00/12:00
+10:00/10:25 iteration
+10:25/10:30 short break
+10:30/10:55 iteration
+10:55/11:00 short break
+11:00/11:25 iteration
+11:25/11:30 short break
+11:30/12:00 iteration
+12:00/12:30 long break
+
+12:30/14:00
+12:30/12:55 iteration
+12:55/13:00 short break
+13:00/13:25 iteration
+13:25/13:30 short break
+13:30/13:45 iteration
+13:45/14:00 long break
+
+14:00/16:00
+14:00/14:25 iteration
+14:25/14:30 short break
+14:30/14:55 iteration
+14:55/15:00 short break
+15:00/15:25 iteration
+15:25/15:30 short break
+15:30/15:45 iteration
+15:45/16:00 long break
+
+16:00/18:00
+16:00/16:25 iteration
+16:25/16:30 short break
+16:30/16:55 iteration
+16:55/17:00 short break
+17:00/17:25 iteration
+17:25/17:30 short break
+17:30/17:45 iteration
+17:45/18:00 long break
+
+18/20
+20/22
+22/24
+
+short break: 0X:25/0X:30 | 0X:55/0X:00
+long  break: 0X:45/0X:00
+
+long break hours:
+08 / 10 / 12 / 14 / 16
+
+short break every hour 1 or 2 breaks
