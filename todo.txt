@@ -1,0 +1,4 @@
+TODO:
+- replace real time timer with countdown to next iteration/short or longbreak
+- angular PWA
+https://angular.io/guide/service-worker-getting-started
