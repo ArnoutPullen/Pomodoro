@@ -50,11 +50,10 @@ export class TimerComponent implements OnInit {
         && min >= 45) {
             this.status = 'longBreak';
         // 14:25/14:30 | 14:55/15:00 | 15:25/15:30
-        // TODO: bugfix 15:30:15
         } else if (this.breakType === 'shortBreak'
-        && ( hour % 2 === 0 && min >= 25 && min <= 30 ) // first: 14:25/14:30
+        && ( hour % 2 === 0 && min >= 25 && min < 30 ) // first: 14:25/14:30
         || ( hour % 2 === 0 && min >= 55 ) // second: 14:55/15:00
-        || ( hour % 2 === 1 && min >= 25 && min <= 30 ) ) { // third: 15:25/15:30
+        || ( hour % 2 === 1 && min >= 25 && min < 30 ) ) { // third: 15:25/15:30
             this.status = 'shortBreak';
         } else {
             this.status = 'iteration';
