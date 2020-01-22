@@ -5,8 +5,8 @@
 08:55/09:00 short break
 09:00/09:25 iteration
 09:25/09:30 short break
-09:30/09:45 iteration
-09:45/10:00 long break
+09:30/09:50 iteration
+09:50/10:00 long break
 
 10:00/12:00
 10:00/10:25 iteration
@@ -23,8 +23,8 @@
 12:55/13:00 short break
 13:00/13:25 iteration
 13:25/13:30 short break
-13:30/13:45 iteration
-13:45/14:00 long break
+13:30/13:50 iteration
+13:50/14:00 long break
 
 14:00/16:00
 14:00/14:25 iteration
@@ -33,8 +33,8 @@
 14:55/15:00 short break
 15:00/15:25 iteration
 15:25/15:30 short break
-15:30/15:45 iteration
-15:45/16:00 long break
+15:30/15:50 iteration
+15:50/16:00 long break
 
 16:00/18:00
 16:00/16:25 iteration
@@ -43,15 +43,15 @@
 16:55/17:00 short break
 17:00/17:25 iteration
 17:25/17:30 short break
-17:30/17:45 iteration
-17:45/18:00 long break
+17:30/17:50 iteration
+17:50/18:00 long break
 
 18/20
 20/22
 22/24
 
 short break: 0X:25/0X:30 | 0X:55/0X:00
-long  break: 0X:45/0X:00
+long  break: 0X:50/0X:00
 
 long break hours:
 08 / 10 / 12 / 14 / 16

@@ -1,4 +1,7 @@
 TODO:
 - replace real time timer with countdown to next iteration/short or longbreak
+- geluid afspelen bij begin en einde pauze
+- verander long break van 15 minuten naar 10 minuten
+- possibility to switch between even and odd hours so 12/14/16/18 cycle or 13/15/17/19 cycle
 - angular PWA
 https://angular.io/guide/service-worker-getting-started
