@@ -7,14 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
-    timer: number;
     interval;
     date = new Date();
-    time: string;
 
     iteration: 30;
     shortBreak = 5;
-    longBreak = 15;
+    longBreak = 10;
 
     status: string;
     breakType: string;
@@ -47,13 +45,13 @@ export class TimerComponent implements OnInit {
         // check if there is currently a break
         // before 12/14/16/18/20 etc. hours
         if (this.breakType === 'longBreak'
-        && min >= 45) {
+        && min >= 60 - this.longBreak) {
             this.status = 'longBreak';
         // 14:25/14:30 | 14:55/15:00 | 15:25/15:30
         } else if (this.breakType === 'shortBreak'
-        && ( hour % 2 === 0 && min >= 25 && min < 30 ) // first: 14:25/14:30
-        || ( hour % 2 === 0 && min >= 55 ) // second: 14:55/15:00
-        || ( hour % 2 === 1 && min >= 25 && min < 30 ) ) { // third: 15:25/15:30
+        && ( hour % 2 === 0 && min >= ( 30 - this.shortBreak ) && min < 30 ) // first: 14:25/14:30
+        || ( hour % 2 === 0 && min >= ( 60 - this.shortBreak ) ) // second: 14:55/15:00
+        || ( hour % 2 === 1 && min >= ( 30 - this.shortBreak ) && min < 30 ) ) { // third: 15:25/15:30
             this.status = 'shortBreak';
         } else {
             this.status = 'iteration';
