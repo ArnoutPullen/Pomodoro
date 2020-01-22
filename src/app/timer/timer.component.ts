@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from 'moment';
 
 @Component({
     selector: 'app-timer',
@@ -12,9 +11,6 @@ export class TimerComponent implements OnInit {
     interval;
     date = new Date();
     time: string;
-
-    // startTime: number[] = [8, 0];
-    // endTime: number[] = [18, 0];
 
     iteration: 30;
     shortBreak = 5;
@@ -36,18 +32,14 @@ export class TimerComponent implements OnInit {
     intervaler() {
         // timer
         this.date = new Date();
-        // this.timer = this.date.getTime();
 
         // pomodoro calculation
         const hour = this.date.getHours();
         const min = this.date.getMinutes();
-        // const minutesLeft = min > 30 ? min - 30 : min;
-        // let breakTimeStart = 30 - this.shortBreak;
 
         // determine next break type
         if ((hour + 1) % 2 === 0 && min >= 30) {
             this.breakType = 'longBreak';
-            // breakTimeStart = 30 - this.longBreak;
         } else {
             this.breakType = 'shortBreak';
         }
@@ -78,20 +70,8 @@ export class TimerComponent implements OnInit {
             this.backgroundColor = '#D50000';
             this.text = 'Pomodoro';
         }
-
-        // check if time is between startTime and endTime
-        /*
-        if (this.date.getHours() >= this.startTime[0] // 7 | 8
-        && ( this.date.getHours() === this.startTime[0] && this.date.getMinutes() >= this.startTime[1] )
-        && this.date.getHours() <= this.endTime[0]
-        && ( this.date.getHours() === this.endTime[0] && this.date.getMinutes() <= this.endTime[1]) ) {
-            this.start();
-        } else {
-            console.log('stopped worktime over');
-            this.pauseTimer();
-        }
-        */
     }
+
     startTimer() {
         this.interval = setInterval(() => {
             this.intervaler();
