@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
-    interval;
+    interval: any;
+    audio: any;
     date = new Date();
 
     iteration: 30;
@@ -25,6 +26,14 @@ export class TimerComponent implements OnInit {
 
     ngOnInit() {
         this.startTimer();
+        this.audio = new Audio();
+        this.audio.src = "/assets/audio/schoolbel.mp3";
+        this.audio.load();
+        // this.date = new Date("01-23-2020 17:24:58");
+    }
+
+    play() {
+        this.audio.play();
     }
 
     intervaler() {
@@ -34,6 +43,7 @@ export class TimerComponent implements OnInit {
         // pomodoro calculation
         const hour = this.date.getHours();
         const min = this.date.getMinutes();
+        const oldStatus = this.status;
 
         // determine next break type
         if ((hour + 1) % 2 === 0 && min >= 30) {
@@ -57,14 +67,26 @@ export class TimerComponent implements OnInit {
             this.status = 'iteration';
         }
 
+        // Check if break starts
+        if (oldStatus == 'iteration'
+        && ( this.status == 'shortBreak' || this.status == 'longBreak' ) ) {
+            this.play();
+        }
+
+        // Check if break ends
+        if ( ( oldStatus == 'shortBreak' || oldStatus == 'longBreak' )
+        && this.status == 'iteration' ) {
+            this.play();
+        }
+
         if (this.status === 'longBreak') {
-            this.backgroundColor = '#00C853';
+            this.backgroundColor = '#D50000';
             this.text = 'Pauze voor ' + this.longBreak + ' minuten';
         } else if (this.status === 'shortBreak') {
             this.backgroundColor = '#FF6D00';
             this.text = 'Pauze voor ' + this.shortBreak + ' minuten';
         } else {
-            this.backgroundColor = '#D50000';
+            this.backgroundColor = '#00C853';
             this.text = 'Pomodoro';
         }
     }
