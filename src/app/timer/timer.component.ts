@@ -7,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimerComponent implements OnInit {
 
+    // timer
+    hour: number;
+    minute: number;
+    second: number;
+
     interval: any;
-    audio: any;
     date = new Date();
 
     iteration: 30;
@@ -22,77 +26,91 @@ export class TimerComponent implements OnInit {
     backgroundColor: string;
     text: string;
     countDown: any;
+    audio: any;
 
     constructor() { }
 
     ngOnInit() {
-        this.date = new Date('01-23-2020 15:50:58');
+        // start timer
+        this.date = new Date('01-23-2020 16:30:58');
         this.startTimer();
+
+        // load audio
         this.audio = new Audio();
         this.audio.src = '/assets/audio/schoolbel.mp3';
         this.audio.load();
-        this.date = new Date('01-23-2020 15:50:56');
     }
 
     play() {
         this.audio.play();
     }
 
-    calculateCountDown(endMin: any) {
-        const min = this.date.getMinutes();
-        const sec = this.date.getSeconds();
+    calculateCountDown(min = 60) {
+        const m = String(min - this.minute - 1).padStart(2, '0');
+        const s = String(60 - this.second).padStart(2, '0');
 
-        const m = (59 - sec).toString().length === 1 ? '0' + (59 - sec) : 59 - sec;
-        const s = (endMin - sec).toString().length === 1 ? '0' + (endMin - sec) : endMin - sec;
-
-        this.countDown = (59 - min) + ':' + s;
+        this.countDown = `${m}:${s}`;
     }
 
     intervaler() {
         // timer
         // this.date = new Date();
 
-        // pomodoro calculation
-        const hour = this.date.getHours();
-        const min = this.date.getMinutes();
-        const sec = this.date.getSeconds();
+        // pomodoro magic
+        this.hour = this.date.getHours();
+        this.minute = this.date.getMinutes();
+        this.second = this.date.getSeconds();
         const oldStatus = this.status;
 
         // determine next break type
-        if ((hour + 1) % 2 === 0 && min >= 30) {
+        if ((this.hour + 1) % 2 === 0 && this.minute >= 30) {
             this.breakType = 'longBreak';
         } else {
             this.breakType = 'shortBreak';
         }
 
         // check if there is currently a break
+        let calc = 60;
         // before 12/14/16/18/20 etc. hours
         if (this.breakType === 'longBreak'
-            && min >= 60 - this.longBreak) {
-            // const m = (59 - sec).toString().length == 1 ? '0' + (59 - sec) : 59 - sec;
-            // const s = (60 - sec).toString().length == 1 ? '0' + (60 - sec) : 60 - sec;
-            // this.countDown = ( 59 - min ) + ':' + s;
-            this.calculateCountDown(60);
+            && this.minute >= 60 - this.longBreak) {
             this.status = 'longBreak';
+            calc = 50;
+        } else if (this.breakType === 'shortBreak') {
             // 14:25/14:30 | 14:55/15:00 | 15:25/15:30
-        } else if (this.breakType === 'shortBreak'
-            && (hour % 2 === 0 && min >= (30 - this.shortBreak) && min < 30) // first: 14:25/14:30
-            || (hour % 2 === 0 && min >= (60 - this.shortBreak)) // second: 14:55/15:00
-            || (hour % 2 === 1 && min >= (30 - this.shortBreak) && min < 30)) { // third: 15:25/15:30
-            this.status = 'shortBreak';
+            // first: 14:25/14:30
+            // third: 15:25/15:30
+            if (this.minute >= (30 - this.shortBreak) && this.minute < 30) {
+                if (this.minute < 25) {
+                    calc = 25;
+                } else {
+                    calc = 30;
+                }
+                this.status = 'shortBreak';
+                // second: 14:55/15:00
+            } else if (this.hour % 2 === 0 && this.minute >= (60 - this.shortBreak)) {
+                calc = 55;
+                this.status = 'shortBreak';
+            } else {
+                // ???
+                calc = 25;
+            }
         } else {
+            if (this.breakType === 'longBreak') {
+                calc = 50;
+            } else if (this.minute >= 30 && this.minute < 55) {
+                calc = 55;
+            } else if (this.minute < 25) {
+                calc = 25;
+            }
             this.status = 'iteration';
         }
+        // calculate countdown
+        this.calculateCountDown(calc);
 
-        // Check if break starts
-        if (oldStatus === 'iteration'
-            && (this.status === 'shortBreak' || this.status === 'longBreak')) {
-            this.play();
-        }
-
-        // Check if break ends
-        if ((oldStatus === 'shortBreak' || oldStatus === 'longBreak')
-            && this.status === 'iteration') {
+        // Play sound with each transition
+        // console.log(oldStatus);
+        if (oldStatus !== this.status && oldStatus !== undefined) {
             this.play();
         }
 
