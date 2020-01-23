@@ -4,7 +4,6 @@ MAYBE:
 TODO:
 - replace real time timer with countdown to next iteration/short or longbreak
 - pauze toevoegen en cycles hierop aanpassen 12:00/12:30 pauze of werkwijze veranderen
-- switch colors: shortBreak orange, longbreak red, iteration green
 
 - countdown in page title toevoegen (04:00 Pomodoro)
 - angular PWA
@@ -16,3 +15,4 @@ https://angular.io/guide/service-worker-getting-started
 DONE:
 X verander long break van 15 minuten naar 10 minuten
 X geluid afspelen bij begin en einde pauze
+X switch colors: shortBreak orange, longbreak red, iteration green
