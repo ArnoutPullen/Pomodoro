@@ -21,28 +21,41 @@ export class TimerComponent implements OnInit {
     // visuals
     backgroundColor: string;
     text: string;
+    countDown: any;
 
     constructor() { }
 
     ngOnInit() {
+        this.date = new Date("01-23-2020 15:50:58");
         this.startTimer();
         this.audio = new Audio();
         this.audio.src = "/assets/audio/schoolbel.mp3";
         this.audio.load();
-        // this.date = new Date("01-23-2020 17:24:58");
+        this.date = new Date("01-23-2020 15:50:56");
     }
 
     play() {
         this.audio.play();
     }
 
+    calculateCountDown(endMin: any) {
+        const min = this.date.getMinutes();
+        const sec = this.date.getSeconds();
+
+        const m = (59 - sec).toString().length == 1 ? '0' + (59 - sec) : 59 - sec;
+        const s = (endMin - sec).toString().length == 1 ? '0' + (endMin - sec) : endMin - sec;
+
+        this.countDown = ( 59 - min ) + ':' + s;
+    }
+
     intervaler() {
         // timer
-        this.date = new Date();
+        // this.date = new Date();
 
         // pomodoro calculation
         const hour = this.date.getHours();
         const min = this.date.getMinutes();
+        const sec = this.date.getSeconds();
         const oldStatus = this.status;
 
         // determine next break type
@@ -56,6 +69,10 @@ export class TimerComponent implements OnInit {
         // before 12/14/16/18/20 etc. hours
         if (this.breakType === 'longBreak'
         && min >= 60 - this.longBreak) {
+            // const m = (59 - sec).toString().length == 1 ? '0' + (59 - sec) : 59 - sec;
+            // const s = (60 - sec).toString().length == 1 ? '0' + (60 - sec) : 60 - sec;
+            // this.countDown = ( 59 - min ) + ':' + s;
+            this.calculateCountDown(60);
             this.status = 'longBreak';
         // 14:25/14:30 | 14:55/15:00 | 15:25/15:30
         } else if (this.breakType === 'shortBreak'
