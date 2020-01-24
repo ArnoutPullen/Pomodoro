@@ -49,6 +49,7 @@ export class TimerComponent implements OnInit {
         const s = String(60 - this.second).padStart(2, '0');
 
         this.countDown = `${m}:${s}`;
+        document.title = `(${this.countDown}) Pomodoro`;
     }
 
     intervaler() {
