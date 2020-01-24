@@ -133,13 +133,13 @@ export class TimerComponent implements OnInit {
         }
 
         if (this.status === 'longBreak') {
-            this.backgroundColor = '#D50000';
+            this.backgroundColor = '#00C853';
             this.text = 'Pauze voor ' + this.longBreak + ' minuten';
         } else if (this.status === 'shortBreak') {
             this.backgroundColor = '#FF6D00';
             this.text = 'Pauze voor ' + this.shortBreak + ' minuten';
         } else {
-            this.backgroundColor = '#00C853';
+            this.backgroundColor = '#D50000';
             this.text = 'Pomodoro';
         }
     }
