@@ -32,7 +32,6 @@ export class TimerComponent implements OnInit {
 
     ngOnInit() {
         // start timer
-        this.date = new Date('01-23-2020 16:30:58');
         this.startTimer();
 
         // load audio
@@ -54,7 +53,7 @@ export class TimerComponent implements OnInit {
 
     intervaler() {
         // timer
-        // this.date = new Date();
+        this.date = new Date();
 
         // pomodoro magic
         this.hour = this.date.getHours();
@@ -71,37 +70,55 @@ export class TimerComponent implements OnInit {
 
         // check if there is currently a break
         let calc = 60;
-        // before 12/14/16/18/20 etc. hours
+        // longBreak: before 12/14/16/18/20 etc. hours
         if (this.breakType === 'longBreak'
             && this.minute >= 60 - this.longBreak) {
-            this.status = 'longBreak';
-            calc = 50;
-        } else if (this.breakType === 'shortBreak') {
-            // 14:25/14:30 | 14:55/15:00 | 15:25/15:30
-            // first: 14:25/14:30
-            // third: 15:25/15:30
-            if (this.minute >= (30 - this.shortBreak) && this.minute < 30) {
-                if (this.minute < 25) {
-                    calc = 25;
-                } else {
-                    calc = 30;
-                }
-                this.status = 'shortBreak';
-                // second: 14:55/15:00
-            } else if (this.hour % 2 === 0 && this.minute >= (60 - this.shortBreak)) {
-                calc = 55;
-                this.status = 'shortBreak';
-            } else {
-                // ???
-                calc = 25;
+
+            if (this.minute < 60 - this.longBreak) {
+                calc = 60 - this.longBreak;
             }
+            this.status = 'longBreak';
+
+            // shortBreak: 14:25/14:30 | 14:55/15:00 | 15:25/15:30
+            // first: 14:25/14:30
+        } else if (this.breakType === 'shortBreak'
+            && (this.hour % 2 === 0 && this.minute >= (30 - this.shortBreak) && this.minute < 30)) {
+
+            if (this.minute < 30 - this.shortBreak) {
+                calc = 30 - this.shortBreak;
+            } else {
+                calc = 30;
+            }
+            this.status = 'shortBreak';
+
+            // second: 14:55/15:00
+        } else if (this.breakType === 'shortBreak'
+            && (this.hour % 2 === 0 && this.minute >= (60 - this.shortBreak))) {
+
+            if (this.minute < 60 - this.shortBreak) {
+                calc = 60 - this.shortBreak;
+            }
+            this.status = 'shortBreak';
+
+            // third: 15:25/15:30
+        } else if (this.breakType === 'shortBreak'
+            && (this.hour % 2 === 1 && this.minute >= (30 - this.shortBreak) && this.minute < 30)) {
+
+            if (this.minute < 30 - this.shortBreak) {
+                calc = 30 - this.shortBreak;
+            } else {
+                calc = 30;
+            }
+            this.status = 'shortBreak';
+
         } else {
+
             if (this.breakType === 'longBreak') {
-                calc = 50;
-            } else if (this.minute >= 30 && this.minute < 55) {
-                calc = 55;
-            } else if (this.minute < 25) {
-                calc = 25;
+                calc = 60 - this.longBreak;
+            } else if (this.minute >= 30 && this.minute < 60 - this.shortBreak) {
+                calc = 60 - this.shortBreak;
+            } else if (this.minute < 30 - this.shortBreak) {
+                calc = 30 - this.shortBreak;
             }
             this.status = 'iteration';
         }
@@ -109,7 +126,6 @@ export class TimerComponent implements OnInit {
         this.calculateCountDown(calc);
 
         // Play sound with each transition
-        // console.log(oldStatus);
         if (oldStatus !== this.status && oldStatus !== undefined) {
             this.play();
         }
