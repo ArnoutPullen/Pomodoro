@@ -32,6 +32,7 @@ export class TimerComponent implements OnInit {
 
     ngOnInit() {
         // start timer
+        // this.date = new Date('01-23-2020 15:35:56');
         this.startTimer();
 
         // load audio
