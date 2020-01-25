@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotificationService } from '../notification/notification.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { NotificationService } from '../notification/notification.service';
     templateUrl: './timer.component.html',
     styleUrls: ['./timer.component.scss']
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnInit, OnDestroy {
 
     // timer
     hour: number;
@@ -42,6 +42,9 @@ export class TimerComponent implements OnInit {
         this.audio = new Audio();
         this.audio.src = '/assets/audio/schoolbel.mp3';
         this.audio.load();
+    }
+    ngOnDestroy() {
+        this.pauseTimer();
     }
 
     play() {
