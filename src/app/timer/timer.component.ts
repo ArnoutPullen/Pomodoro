@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from '../notification/notification.service';
 
 @Component({
     selector: 'app-timer',
@@ -12,9 +13,11 @@ export class TimerComponent implements OnInit {
     minute: number;
     second: number;
 
+    // intervaler
     interval: any;
     date = new Date();
 
+    // breaks and iteration time
     iteration: 30;
     shortBreak = 5;
     longBreak = 10;
@@ -28,7 +31,7 @@ export class TimerComponent implements OnInit {
     countDown: any;
     audio: any;
 
-    constructor() { }
+    constructor(private notificationService: NotificationService) { }
 
     ngOnInit() {
         // start timer
@@ -114,7 +117,7 @@ export class TimerComponent implements OnInit {
             this.status = 'shortBreak';
 
         } else {
-
+            // pomodoro
             if (this.breakType === 'longBreak') {
                 calc = 60 - this.longBreak;
             } else if (this.minute >= 30 && this.minute < 60 - this.shortBreak) {
@@ -138,11 +141,7 @@ export class TimerComponent implements OnInit {
         // calculate countdown
         this.calculateCountDown(calc);
 
-        // Play sound with each transition
-        if (oldStatus !== this.status && oldStatus !== undefined) {
-            this.play();
-        }
-
+        // Set visuals
         if (this.status === 'longBreak') {
             this.backgroundColor = '#00C853';
             this.text = 'Pauze voor ' + this.longBreak + ' minuten';
@@ -155,6 +154,19 @@ export class TimerComponent implements OnInit {
         } else {
             this.backgroundColor = '#D50000';
             this.text = 'Pomodoro';
+        }
+
+        // Transition
+        if (oldStatus !== this.status && oldStatus !== undefined) {
+            // Play sound with each transition
+            this.play();
+
+            // Send browser notification
+            if (oldStatus === 'iteration') {
+                this.notificationService.send('Start: ' + this.text);
+            } else {
+                this.notificationService.send('Einde: ' + this.text);
+            }
         }
     }
 
