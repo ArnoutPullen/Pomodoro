@@ -32,7 +32,7 @@ export class TimerComponent implements OnInit {
 
     ngOnInit() {
         // start timer
-        // this.date = new Date('01-23-2020 15:35:56');
+        // this.date = new Date('01-23-2020 12:29:56');
         this.startTimer();
 
         // load audio
@@ -124,6 +124,17 @@ export class TimerComponent implements OnInit {
             }
             this.status = 'iteration';
         }
+
+        // lunch break
+        if (this.hour === 11 && this.minute > 55) {
+            this.status = 'iteration';
+            calc = 60;
+        }
+        if (this.hour === 12 && this.minute < 30) {
+            this.status = 'lunch';
+            calc = 30;
+        }
+
         // calculate countdown
         this.calculateCountDown(calc);
 
@@ -138,6 +149,9 @@ export class TimerComponent implements OnInit {
         } else if (this.status === 'shortBreak') {
             this.backgroundColor = '#FF6D00';
             this.text = 'Pauze voor ' + this.shortBreak + ' minuten';
+        } else if (this.status === 'lunch') {
+            this.backgroundColor = '#00C853';
+            this.text = 'Lunch';
         } else {
             this.backgroundColor = '#D50000';
             this.text = 'Pomodoro';
