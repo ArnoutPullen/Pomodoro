@@ -1,8 +1,8 @@
 {
     "name": "Pomodoro",
     "short_name": "Pomodoro",
-    "theme_color": "#D50000",
-    "background_color": "#D50000",
+    "theme_color": "#FF3D00",
+    "background_color": "#FF3D00",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",

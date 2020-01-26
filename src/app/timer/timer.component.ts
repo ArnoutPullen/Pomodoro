@@ -30,6 +30,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     text: string;
     countDown: any;
     audio: any;
+    class: string;
 
     constructor(private notificationService: NotificationService) { }
 
@@ -146,16 +147,16 @@ export class TimerComponent implements OnInit, OnDestroy {
 
         // Set visuals
         if (this.status === 'longBreak') {
-            this.backgroundColor = '#00C853';
+            this.class = ' break long';
             this.text = 'Pauze voor ' + this.longBreak + ' minuten';
         } else if (this.status === 'shortBreak') {
-            this.backgroundColor = '#FF6D00';
+            this.class = ' break short';
             this.text = 'Pauze voor ' + this.shortBreak + ' minuten';
         } else if (this.status === 'lunch') {
-            this.backgroundColor = '#00C853';
+            this.class = ' break lunch';
             this.text = 'Lunch';
         } else {
-            this.backgroundColor = '#D50000';
+            this.class = ' pomodoro';
             this.text = 'Pomodoro';
         }
 
