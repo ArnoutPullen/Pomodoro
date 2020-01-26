@@ -25,8 +25,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     status: string;
     breakType: string;
 
-    // visuals
-    backgroundColor: string;
+    // UX
     text: string;
     countDown: any;
     audio: any;
@@ -50,6 +49,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     play() {
         this.audio.play();
+    }
+    pause() {
+        this.audio.pause();
     }
 
     calculateCountDown(min = 60) {
@@ -168,8 +170,10 @@ export class TimerComponent implements OnInit, OnDestroy {
             // Send browser notification
             if (oldStatus === 'iteration') {
                 this.notificationService.send('Start: ' + this.text);
-            } else {
-                this.notificationService.send('Einde: ' + this.text);
+            } else if (oldStatus === 'shortBreak') {
+                this.notificationService.send('Einde: ' + 'Pauze voor ' + this.shortBreak + ' minuten');
+            } else if (oldStatus === 'longBreak') {
+                this.notificationService.send('Einde: ' + 'Pauze voor ' + this.longBreak + ' minuten');
             }
         }
     }
