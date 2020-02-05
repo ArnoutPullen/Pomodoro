@@ -35,7 +35,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         // start timer
-        // this.date = new Date('01-23-2020 12:29:56');
+        // this.date = new Date('01-23-2020 13:55:56');
         this.startTimer();
 
         // load audio
@@ -134,13 +134,19 @@ export class TimerComponent implements OnInit, OnDestroy {
             this.status = 'iteration';
         }
 
-        // lunch break 12:00/12:30
-        if (this.hour === 11 && this.minute > (60 - this.longBreak)) {
+        // cancel short break before 12:30 (12:25/12:30)
+        if (this.hour === 12 && this.minute < 30) {
             this.status = 'iteration';
+            calc = 30;
+        }
+        // lunch break 12:30/13:30
+        if (this.hour === 12 && this.minute >= 30) {
+            this.status = 'lunch';
             calc = 60;
         }
-        if (this.hour === 12 && this.minute < 30) {
-            this.status = 'lunch';
+        // lunch walk
+        if (this.hour === 13 && this.minute < 30) {
+            this.status = 'lunchWalk';
             calc = 30;
         }
 
@@ -157,6 +163,9 @@ export class TimerComponent implements OnInit, OnDestroy {
         } else if (this.status === 'lunch') {
             this.class = ' break lunch';
             this.text = 'Lunch';
+        } else if (this.status === 'lunchWalk') {
+            this.class = ' walk lunch';
+            this.text = 'Take a Walk';
         } else {
             this.class = ' pomodoro';
             this.text = 'Pomodoro';
