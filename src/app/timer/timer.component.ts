@@ -134,8 +134,8 @@ export class TimerComponent implements OnInit, OnDestroy {
             this.status = 'iteration';
         }
 
-        // lunch break
-        if (this.hour === 11 && this.minute > 55) {
+        // lunch break 12:00/12:30
+        if (this.hour === 11 && this.minute > (60 - this.longBreak)) {
             this.status = 'iteration';
             calc = 60;
         }
