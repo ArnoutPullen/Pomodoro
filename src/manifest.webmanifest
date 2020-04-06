@@ -3,7 +3,7 @@
     "short_name": "Pomodoro",
     "theme_color": "#FF3D00",
     "background_color": "#FF3D00",
-    "display": "standalone",
+    "display": "fullscreen",
     "scope": "/",
     "start_url": "/",
     "icons": [

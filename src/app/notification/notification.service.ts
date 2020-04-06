@@ -16,11 +16,26 @@ export class NotificationService {
         // check if browser supports notification
         if (!('Notification' in window)) {
             console.error('This browser does not support notification');
-            this.setPermission();
+            this.setPermission('denied');
         } else if (this.getPermission() !== 'denied') {
-            Notification.requestPermission().then((permission) => {
-                this.setPermission();
-            });
+            try {
+                Notification.requestPermission().then((permission) => {
+                    this.setPermission(permission);
+                });
+            } catch (error) {
+                // Safari doesn't return a promise for requestPermissions and it                                                                                                                                       
+                // throws a TypeError. It takes a callback as the first argument                                                                                                                                       
+                // instead.
+                if (error instanceof TypeError) {
+                    Notification.requestPermission(() => {
+                        this.setPermission();
+                    });
+                } else {
+                    this.setPermission('denied');
+                    console.error(error);
+                    throw error;
+                }
+            }
         }
     }
 
@@ -45,7 +60,11 @@ export class NotificationService {
     }
 
     send(title: string, options?: any) {
-        this.notification = new Notification(title);
+        if (this.permisson) {
+            this.notification = new Notification(title);
+        } else {
+            console.error('Notifications not enabled.');
+        }
     }
 
 }
