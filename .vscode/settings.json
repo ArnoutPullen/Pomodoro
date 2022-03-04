@@ -1,3 +1,9 @@
 {
-    "editor.tabSize": 4
+    "editor.tabSize": 4,
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/f0d3ee64-d921-4f84-be61-9b4ec37d313d/resourceGroups/Pomodoro_group/providers/Microsoft.Web/sites/Pomodoro",
+    "appService.deploySubpath": "dist\\pomodoro",
 }
