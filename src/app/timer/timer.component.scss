@@ -4,7 +4,6 @@ $orange: #FF6D00;
 $green: #4CAF50;
 // $green: #00C853;
 $white: #FFFFFF;
-
 .overlay {
     width: 100%;
     height: 100%;
@@ -17,15 +16,19 @@ $white: #FFFFFF;
     color: $white;
     text-align: center;
 }
+
 .overlay.pomodoro {
     background-color: $red;
 }
+
 .overlay.break.short {
     background-color: $orange;
 }
+
 .overlay.break.long {
     background-color: $green;
 }
+
 .overlay.break.lunch {
     background-color: $green;
 }

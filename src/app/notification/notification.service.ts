@@ -23,8 +23,8 @@ export class NotificationService {
                     this.setPermission(permission);
                 });
             } catch (error) {
-                // Safari doesn't return a promise for requestPermissions and it                                                                                                                                       
-                // throws a TypeError. It takes a callback as the first argument                                                                                                                                       
+                // Safari doesn't return a promise for requestPermissions and it
+                // throws a TypeError. It takes a callback as the first argument
                 // instead.
                 if (error instanceof TypeError) {
                     Notification.requestPermission(() => {
@@ -33,7 +33,6 @@ export class NotificationService {
                 } else {
                     this.setPermission('denied');
                     console.error(error);
-                    throw error;
                 }
             }
         }
@@ -42,6 +41,7 @@ export class NotificationService {
     getPermission() {
         return Notification.permission;
     }
+
     setPermission(permission: string = '') {
 
         if (!permission) {
