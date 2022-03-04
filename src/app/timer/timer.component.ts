@@ -9,27 +9,27 @@ import { NotificationService } from '../notification/notification.service';
 export class TimerComponent implements OnInit, OnDestroy {
 
     // timer
-    hour: number;
-    minute: number;
-    second: number;
+    hour: number = 0;
+    minute: number = 0;
+    second: number = 0;
 
     // intervaler
     interval: any;
     date = new Date();
 
     // breaks and iteration time
-    iteration: 30;
+    iteration = 30;
     shortBreak = 5;
     longBreak = 10;
 
-    status: string;
-    breakType: string;
+    status?: string;
+    breakType?: string;
 
     // UX
-    text: string;
+    text?: string;
     countDown: any;
     audio: any;
-    class: string;
+    class: string = '';
 
     constructor(private notificationService: NotificationService) { }
 
@@ -43,6 +43,7 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.audio.src = '/assets/audio/schoolbel.mp3';
         this.audio.load();
     }
+
     ngOnDestroy() {
         this.pauseTimer();
     }
@@ -50,6 +51,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     play() {
         this.audio.play();
     }
+
     pause() {
         this.audio.pause();
     }
@@ -192,6 +194,7 @@ export class TimerComponent implements OnInit, OnDestroy {
             this.intervaler();
         }, 1000);
     }
+
     pauseTimer() {
         clearInterval(this.interval);
     }

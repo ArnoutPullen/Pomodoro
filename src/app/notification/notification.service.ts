@@ -6,9 +6,10 @@ import { Injectable } from '@angular/core';
 export class NotificationService {
 
     permisson: boolean;
-    notification: Notification;
+    notification?: Notification;
 
     constructor() {
+        this.permisson = false;
         this.init();
     }
 
@@ -57,6 +58,7 @@ export class NotificationService {
         } else {
             this.permisson = false;
         }
+        console.log('permission set to: ' + permission);
     }
 
     send(title: string, options?: any) {
@@ -66,5 +68,4 @@ export class NotificationService {
             console.error('Notifications not enabled.');
         }
     }
-
 }
