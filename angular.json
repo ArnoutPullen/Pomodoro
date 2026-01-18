@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "Pomodoro:build:production"
+              "buildTarget": "Pomodoro:build:production"
             },
             "development": {
-              "browserTarget": "Pomodoro:build:development"
+              "buildTarget": "Pomodoro:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Pomodoro:build"
+            "buildTarget": "Pomodoro:build"
           }
         },
         "test": {
