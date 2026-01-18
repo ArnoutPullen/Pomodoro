@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('WebProfitPomodoro app is running!');
+    expect(page.getTitleText()).toEqual('Pomodoro app is running!');
   });
 
   afterEach(async () => {
