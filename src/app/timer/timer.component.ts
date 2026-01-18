@@ -4,7 +4,8 @@ import { NotificationService } from '../notification/notification.service';
 @Component({
     selector: 'app-timer',
     templateUrl: './timer.component.html',
-    styleUrls: ['./timer.component.scss']
+    styleUrls: ['./timer.component.scss'],
+    standalone: false
 })
 export class TimerComponent implements OnInit, OnDestroy {
 
